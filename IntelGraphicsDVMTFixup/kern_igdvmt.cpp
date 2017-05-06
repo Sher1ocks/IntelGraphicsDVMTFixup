@@ -52,9 +52,9 @@ void IGDVMT::deinit() {
 }
 
 void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t address, size_t size) {
-	if (progressState != ProcessingState::EverythingDone) {
-		for (size_t i = 0; i < kextListSize; i++) {
-			if (kextList[i].loadIndex == index) {
+    if (progressState != ProcessingState::EverythingDone) {
+        for (size_t i = 0; i < kextListSize; i++) {
+            if (kextList[i].loadIndex == index) {
                 if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, "com.apple.driver.AppleIntelBDWGraphicsFramebuffer")) {
                     DBGLOG("igdvmt @ found com.apple.driver.AppleIntelBDWGraphicsFramebuffer");
                     if (KernelCheck == KernelVersion::Yosemite){
@@ -116,9 +116,9 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         DBGLOG("igdvmt @ Skylake - 10.12 :: DVMT patches applied");
                     }
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 	
 	// Ignore all the errors for other processors
 	patcher.clearError();
