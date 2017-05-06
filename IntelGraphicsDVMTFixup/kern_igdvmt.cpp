@@ -120,8 +120,8 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
         }
     }
 	
-	// Ignore all the errors for other processors
-	patcher.clearError();
+    // Ignore all the errors for other processors
+    patcher.clearError();
 }
 
 void IGDVMT::applyPatches(KernelPatcher &patcher, size_t index, const KextPatch *patches, size_t patchNum) {
