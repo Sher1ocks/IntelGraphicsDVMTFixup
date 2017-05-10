@@ -57,7 +57,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
             if (kextList[i].loadIndex == index) {
                 if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, "com.apple.driver.AppleIntelBDWGraphicsFramebuffer")) {
                     DBGLOG("igdvmt @ found com.apple.driver.AppleIntelBDWGraphicsFramebuffer");
-                    if (KernelCheck == KernelVersion::Yosemite){
+                    /*if (KernelCheck == KernelVersion::Yosemite){
                         const uint8_t find[]    = {0x39, 0xCF, 0x76, 0x3C};
                         const uint8_t replace[] = {0x39, 0xCF, 0xEB, 0x3C};
                         KextPatch kext_patch {
@@ -89,11 +89,86 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt @ Broadwell - 10.12 :: DVMT patches applied");
-                    }
+                    }*/
+                    const uint8_t find[]    = {0x01, 0x02, 0x02, 0x02, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x20, 0x02};
+                    const uint8_t replace[] = {0x01, 0x02, 0x02, 0x02, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch {
+                        {&kextList[i], find, replace, sizeof(find), 1},
+                        KernelVersion::Yosemite, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Broadwell - 00020202 00002002 00002002 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find1[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0xF0, 0x00};
+                    const uint8_t replace1[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch1 {
+                        {&kextList[i], find1, replace1, sizeof(find1), 1},
+                        KernelVersion::Yosemite, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch1, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Broadwell - 00030303 00000001 0000f000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find2[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x50, 0x01};
+                    const uint8_t replace2[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch2 {
+                        {&kextList[i], find2, replace2, sizeof(find2), 1},
+                        KernelVersion::Yosemite, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch2, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Broadwell - 00030303 00002002 00005001 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find3[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x60, 0x02};
+                    const uint8_t replace3[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch3 {
+                        {&kextList[i], find3, replace3, sizeof(find3), 1},
+                        KernelVersion::Yosemite, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch3, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Broadwell - 00030303 00006002 00006002 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find4[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x50, 0x01};
+                    const uint8_t replace4[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch4 {
+                        {&kextList[i], find4, replace4, sizeof(find4), 1},
+                        KernelVersion::Yosemite, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch4, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Broadwell - 01030303 00002002 00005001 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find5[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x50, 0x01};
+                    const uint8_t replace5[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch5 {
+                        {&kextList[i], find5, replace5, sizeof(find5), 1},
+                        KernelVersion::Yosemite, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch5, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Broadwell - 01030303 00006002 00005001 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find6[]    = {0x01, 0x03, 0x04, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x50, 0x01};
+                    const uint8_t replace6[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch6 {
+                        {&kextList[i], find6, replace6, sizeof(find6), 1},
+                        KernelVersion::Yosemite, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch6, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Broadwell - 01030403 00002002 00005001 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                 }
                 else if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, "com.apple.driver.AppleIntelSKLGraphicsFramebuffer")) {
                     DBGLOG("igdvmt @ found com.apple.driver.AppleIntelSKLGraphicsFramebuffer");
-                    if (KernelCheck == KernelVersion::ElCapitan){
+                    /*if (KernelCheck == KernelVersion::ElCapitan){
                         const uint8_t find[]    = {0x41, 0x39, 0xC4, 0x76, 0x2A};
                         const uint8_t replace[] = {0x41, 0x39, 0xC4, 0xEB, 0x2A};
                         KextPatch kext_patch {
@@ -114,7 +189,71 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt @ Skylake - 10.12 :: DVMT patches applied");
-                    }
+                    }*/
+                    const uint8_t find[]    = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
+                    const uint8_t replace[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch {
+                        {&kextList[i], find, replace, sizeof(find), 1},
+                        KernelVersion::ElCapitan, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Skylake - 01010101 00006002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find1[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x00, 0x00};
+                    const uint8_t replace1[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch1 {
+                        {&kextList[i], find1, replace1, sizeof(find1), 1},
+                        KernelVersion::ElCapitan, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch1, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Skylake - 01030303 00002002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find2[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x50, 0x01};
+                    const uint8_t replace2[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch2 {
+                        {&kextList[i], find2, replace2, sizeof(find2), 1},
+                        KernelVersion::ElCapitan, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch2, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Skylake - 01030303 00002002 00005001 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find3[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x80, 0x02, 0x00, 0x00, 0x00, 0x00};
+                    const uint8_t replace3[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch3 {
+                        {&kextList[i], find3, replace3, sizeof(find3), 1},
+                        KernelVersion::ElCapitan, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch3, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Skylake - 01030303 00008002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find4[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x90, 0x03, 0x00, 0x00, 0x00, 0x00};
+                    const uint8_t replace4[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch4 {
+                        {&kextList[i], find4, replace4, sizeof(find4), 1},
+                        KernelVersion::ElCapitan, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch4, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Skylake - 01030303 00009003 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find5[]    = {0x01, 0x03, 0x04, 0x04, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x00, 0x00};
+                    const uint8_t replace5[] = {0x01, 0x03, 0x04, 0x04, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch5 {
+                        {&kextList[i], find5, replace5, sizeof(find5), 1},
+                        KernelVersion::ElCapitan, KernelVersion::Sierra
+                    };
+                    applyPatches(patcher, index, &kext_patch5, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Skylake - 01030404 00002002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                 }
             }
         }
