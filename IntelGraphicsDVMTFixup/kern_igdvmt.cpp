@@ -191,7 +191,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         DBGLOG("igdvmt @ Skylake - 10.12 :: DVMT patches applied");
                     }*/
                     const uint8_t find[]    = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
-                    const uint8_t replace[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    const uint8_t replace[] = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch {
                         {&kextList[i], find, replace, sizeof(find), 1},
                         KernelVersion::ElCapitan, KernelVersion::Sierra
