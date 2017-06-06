@@ -1,5 +1,8 @@
 IntelGraphicsDVMTFixup Changelog
 =============================
+#### v1.1.6
+- Added Kabylake Graphics
+
 #### v1.1.5
 - Added OSBundleCompatibleVersion
 
