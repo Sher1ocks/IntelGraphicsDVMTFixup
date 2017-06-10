@@ -294,57 +294,81 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                      progressState |= ProcessingState::GraphicsFramebufferPatched;
                      DBGLOG("igdvmt @ Kabylake - 10.13 :: DVMT patches applied");
                     }*/
-                    const uint8_t find[]    = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
-                    const uint8_t replace[] = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+
+                    
+                    const uint8_t find[]    = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
+                    const uint8_t replace[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch {
-                        {&kextList[i], find, replace, sizeof(find), 1},
+                        {&kextList[i], find, replace, sizeof(find), 4},
                         KernelVersion::HighSierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
-                    DBGLOG("igdvmt @ Kabylake - 01010101 00006002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    DBGLOG("igdvmt @ Kabylake - 00030303 00006002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                     
                     
-                    const uint8_t find1[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x00, 0x00};
-                    const uint8_t replace1[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    const uint8_t find1[]    = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x90, 0x03, 0x00, 0x00, 0x50, 0x01};
+                    const uint8_t replace1[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch1 {
-                        {&kextList[i], find1, replace1, sizeof(find1), 2},
+                        {&kextList[i], find1, replace1, sizeof(find1), 1},
                         KernelVersion::HighSierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch1, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
-                    DBGLOG("igdvmt @ Kabylake - 01030303 00002002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    DBGLOG("igdvmt @ Kabylake - 00030303 00009003 00005001 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                     
                     
-                    const uint8_t find2[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
-                    const uint8_t replace2[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    const uint8_t find2[]    = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
+                    const uint8_t replace2[] = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch2 {
-                        {&kextList[i], find2, replace2, sizeof(find2), 2},
+                        {&kextList[i], find2, replace2, sizeof(find2), 1},
                         KernelVersion::HighSierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch2, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
-                    DBGLOG("igdvmt @ Kabylake - 01030303 00006002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    DBGLOG("igdvmt @ Kabylake - 01010101 00006002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                     
                     
-                    const uint8_t find3[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x50, 0x01};
+                    const uint8_t find3[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace3[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch3 {
-                        {&kextList[i], find3, replace3, sizeof(find3), 1},
+                        {&kextList[i], find3, replace3, sizeof(find3), 2},
                         KernelVersion::HighSierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch3, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
-                    DBGLOG("igdvmt @ Kabylake - 01030303 00006002 00005001 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    DBGLOG("igdvmt @ Kabylake - 01030303 00002002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                     
                     
-                    const uint8_t find4[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x90, 0x03, 0x00, 0x00, 0x00, 0x00};
+                    const uint8_t find4[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace4[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch4 {
                         {&kextList[i], find4, replace4, sizeof(find4), 2},
                         KernelVersion::HighSierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch4, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Kabylake - 01030303 00006002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find5[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x50, 0x01};
+                    const uint8_t replace5[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch5 {
+                        {&kextList[i], find5, replace5, sizeof(find5), 1},
+                        KernelVersion::HighSierra, KernelVersion::HighSierra
+                    };
+                    applyPatches(patcher, index, &kext_patch5, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt @ Kabylake - 01030303 00006002 00005001 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    const uint8_t find6[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x90, 0x03, 0x00, 0x00, 0x00, 0x00};
+                    const uint8_t replace6[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
+                    KextPatch kext_patch6 {
+                        {&kextList[i], find6, replace6, sizeof(find6), 2},
+                        KernelVersion::HighSierra, KernelVersion::HighSierra
+                    };
+                    applyPatches(patcher, index, &kext_patch6, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
                     DBGLOG("igdvmt @ Kabylake - 01030303 00009003 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                 }
