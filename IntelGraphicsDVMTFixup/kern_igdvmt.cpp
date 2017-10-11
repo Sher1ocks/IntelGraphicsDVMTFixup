@@ -16,26 +16,25 @@
 
 #include "kern_igdvmt.hpp"
 
-
-KernelVersion KernelCheck = getKernelVersion();
-
-
+static const char *kextBDWGraphicsFramebufferId { "com.apple.driver.AppleIntelBDWGraphicsFramebuffer" };
 static const char *kextBDWGraphicsFramebuffer[] {
     "/System/Library/Extensions/AppleIntelBDWGraphicsFramebuffer.kext/Contents/MacOS/AppleIntelBDWGraphicsFramebuffer" };
-    
+
+static const char *kextSKLGraphicsFramebufferId { "com.apple.driver.AppleIntelSKLGraphicsFramebuffer" };
 static const char *kextSKLGraphicsFramebuffer[] {
     "/System/Library/Extensions/AppleIntelSKLGraphicsFramebuffer.kext/Contents/MacOS/AppleIntelSKLGraphicsFramebuffer" };
 
+static const char *kextKBLGraphicsFramebufferId { "com.apple.driver.AppleIntelKBLGraphicsFramebuffer" };
 static const char *kextKBLGraphicsFramebuffer[] {
     "/System/Library/Extensions/AppleIntelKBLGraphicsFramebuffer.kext/Contents/MacOS/AppleIntelKBLGraphicsFramebuffer" };
 
 static KernelPatcher::KextInfo kextList[] {
-    { "com.apple.driver.AppleIntelBDWGraphicsFramebuffer", kextBDWGraphicsFramebuffer, 1, {true, true}, {}, KernelPatcher::KextInfo::Unloaded },
-    { "com.apple.driver.AppleIntelSKLGraphicsFramebuffer", kextSKLGraphicsFramebuffer, 1, {true, true}, {}, KernelPatcher::KextInfo::Unloaded },
-    { "com.apple.driver.AppleIntelKBLGraphicsFramebuffer", kextKBLGraphicsFramebuffer, 1, {true, true}, {}, KernelPatcher::KextInfo::Unloaded },
+    { kextBDWGraphicsFramebufferId, kextBDWGraphicsFramebuffer, 1, {true, true}, {}, KernelPatcher::KextInfo::Unloaded },
+    { kextSKLGraphicsFramebufferId, kextSKLGraphicsFramebuffer, 1, {true, true}, {}, KernelPatcher::KextInfo::Unloaded },
+    { kextKBLGraphicsFramebufferId, kextKBLGraphicsFramebuffer, 1, {true, true}, {}, KernelPatcher::KextInfo::Unloaded },
 };
 
-static size_t kextListSize {3};
+static size_t kextListSize {arrsize(kextList)};
 
 bool IGDVMT::init() {
 	LiluAPI::Error error = lilu.onKextLoad(kextList, kextListSize,
@@ -59,9 +58,9 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
     if (progressState != ProcessingState::EverythingDone) {
         for (size_t i = 0; i < kextListSize; i++) {
             if (kextList[i].loadIndex == index) {
-                if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, "com.apple.driver.AppleIntelBDWGraphicsFramebuffer")) {
-                    DBGLOG("igdvmt", "found com.apple.driver.AppleIntelBDWGraphicsFramebuffer");
-                    /*if (KernelCheck == KernelVersion::Yosemite){
+                if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, kextBDWGraphicsFramebufferId)) {
+                    DBGLOG("igdvmt", "found %s", kextBDWGraphicsFramebufferId);
+                    /*if (getKernelVersion() == KernelVersion::Yosemite){
                         const uint8_t find[]    = {0x39, 0xCF, 0x76, 0x3C};
                         const uint8_t replace[] = {0x39, 0xCF, 0xEB, 0x3C};
                         KextPatch kext_patch {
@@ -72,7 +71,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Broadwell - 10.10 :: DVMT patches applied");
                     }
-                    else if (KernelCheck == KernelVersion::ElCapitan){
+                    else if (getKernelVersion() == KernelVersion::ElCapitan){
                         const uint8_t find[]    = {0x41, 0x39, 0xC4, 0x76, 0x3E};
                         const uint8_t replace[] = {0x41, 0x39, 0xC4, 0xEB, 0x3E};
                         KextPatch kext_patch {
@@ -83,7 +82,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Broadwell - 10.11 :: DVMT patches applied");
                     }
-                    else if (KernelCheck == KernelVersion::Sierra){
+                    else if (getKernelVersion() == KernelVersion::Sierra){
                         const uint8_t find[]    = {0x89, 0x45, 0xC8, 0x39, 0xC7, 0x76, 0x4F};
                         const uint8_t replace[] = {0x89, 0x45, 0xC8, 0x39, 0xC7, 0xEB, 0x4F};
                         KextPatch kext_patch {
@@ -94,7 +93,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Broadwell - 10.12 :: DVMT patches applied");
                     }
-                    else if (KernelCheck == KernelVersion::HighSierra){
+                    else if (getKernelVersion() == KernelVersion::HighSierra){
                         const uint8_t find[]    = {0x4C, 0x89, 0x5D, 0xB8, 0x76, 0x44};
                         const uint8_t replace[] = {0x4C, 0x89, 0x5D, 0xB8, 0xEB, 0x44};
                         KextPatch kext_patch {
@@ -181,9 +180,9 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
                     DBGLOG("igdvmt", "Broadwell - 01030403 00002002 00005001 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                 }
-                else if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, "com.apple.driver.AppleIntelSKLGraphicsFramebuffer")) {
-                    DBGLOG("igdvmt", "found com.apple.driver.AppleIntelSKLGraphicsFramebuffer");
-                    /*if (KernelCheck == KernelVersion::ElCapitan){
+                else if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, kextSKLGraphicsFramebufferId)) {
+                    DBGLOG("igdvmt", "found %s", kextSKLGraphicsFramebufferId);
+                    /*if (getKernelVersion() == KernelVersion::ElCapitan){
                         const uint8_t find[]    = {0x41, 0x39, 0xC4, 0x76, 0x2A};
                         const uint8_t replace[] = {0x41, 0x39, 0xC4, 0xEB, 0x2A};
                         KextPatch kext_patch {
@@ -194,7 +193,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Skylake - 10.11 :: DVMT patches applied");
                     }
-                    else if (KernelCheck == KernelVersion::Sierra){
+                    else if (getKernelVersion() == KernelVersion::Sierra){
                         const uint8_t find[]    = {0x89, 0x45, 0xC8, 0x39, 0xC6, 0x76, 0x51};
                         const uint8_t replace[] = {0x89, 0x45, 0xC8, 0x39, 0xC6, 0xEB, 0x51};
                         KextPatch kext_patch {
@@ -205,7 +204,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Skylake - 10.12 :: DVMT patches applied");
                     }
-                    else if (KernelCheck == KernelVersion::HighSierra){
+                    else if (getKernelVersion() == KernelVersion::HighSierra){
                         const uint8_t find[]    = {0x4C, 0x89, 0x55, 0xB8, 0x76, 0x40};
                         const uint8_t replace[] = {0x4C, 0x89, 0x55, 0xB8, 0xEB, 0x40};
                         KextPatch kext_patch {
@@ -281,9 +280,9 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
                     DBGLOG("igdvmt", "Skylake - 01030404 00002002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                 }
-                else if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, "com.apple.driver.AppleIntelKBLGraphicsFramebuffer")) {
-                    DBGLOG("igdvmt", "found com.apple.driver.AppleIntelKBLGraphicsFramebuffer");
-                    /*if (KernelCheck == KernelVersion::HighSierra){
+                else if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, kextKBLGraphicsFramebufferId)) {
+                    DBGLOG("igdvmt", "found %s", kextKBLGraphicsFramebufferId);
+                    /*if (getKernelVersion() == KernelVersion::HighSierra){
                      const uint8_t find[]    = {0x4C, 0x89, 0x5D, 0xC0, 0x76, 0x46};
                      const uint8_t replace[] = {0x4C, 0x89, 0x5D, 0xC0, 0xEB, 0x46};
                      KextPatch kext_patch {
