@@ -70,8 +70,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Broadwell - 10.10 :: DVMT patches applied");
-                    }
-                    else if (getKernelVersion() == KernelVersion::ElCapitan){
+                    } else if (getKernelVersion() == KernelVersion::ElCapitan){
                         const uint8_t find[]    = {0x41, 0x39, 0xC4, 0x76, 0x3E};
                         const uint8_t replace[] = {0x41, 0x39, 0xC4, 0xEB, 0x3E};
                         KextPatch kext_patch {
@@ -81,8 +80,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Broadwell - 10.11 :: DVMT patches applied");
-                    }
-                    else if (getKernelVersion() == KernelVersion::Sierra){
+                    } else if (getKernelVersion() == KernelVersion::Sierra){
                         const uint8_t find[]    = {0x89, 0x45, 0xC8, 0x39, 0xC7, 0x76, 0x4F};
                         const uint8_t replace[] = {0x89, 0x45, 0xC8, 0x39, 0xC7, 0xEB, 0x4F};
                         KextPatch kext_patch {
@@ -92,8 +90,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Broadwell - 10.12 :: DVMT patches applied");
-                    }
-                    else if (getKernelVersion() == KernelVersion::HighSierra){
+                    } else if (getKernelVersion() == KernelVersion::HighSierra){
                         const uint8_t find[]    = {0x4C, 0x89, 0x5D, 0xB8, 0x76, 0x44};
                         const uint8_t replace[] = {0x4C, 0x89, 0x5D, 0xB8, 0xEB, 0x44};
                         KextPatch kext_patch {
@@ -107,7 +104,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find[]    = {0x00, 0x02, 0x02, 0x02, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x20, 0x02};
                     const uint8_t replace[] = {0x00, 0x02, 0x02, 0x02, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch {
-                        {&kextList[i], find, replace, sizeof(find), 2},
+                        {&kextList[i], find, replace, sizeof(find), 0},
                         KernelVersion::Yosemite, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch, 1);
@@ -118,7 +115,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find1[]    = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0xF0, 0x00};
                     const uint8_t replace1[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch1 {
-                        {&kextList[i], find1, replace1, sizeof(find1), 7},
+                        {&kextList[i], find1, replace1, sizeof(find1), 0},
                         KernelVersion::Yosemite, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch1, 1);
@@ -129,7 +126,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find2[]    = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x50, 0x01};
                     const uint8_t replace2[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch2 {
-                        {&kextList[i], find2, replace2, sizeof(find2), 2},
+                        {&kextList[i], find2, replace2, sizeof(find2), 0},
                         KernelVersion::Yosemite, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch2, 1);
@@ -140,7 +137,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find3[]    = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x60, 0x02};
                     const uint8_t replace3[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch3 {
-                        {&kextList[i], find3, replace3, sizeof(find3), 1},
+                        {&kextList[i], find3, replace3, sizeof(find3), 0},
                         KernelVersion::Yosemite, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch3, 1);
@@ -151,7 +148,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find4[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x50, 0x01};
                     const uint8_t replace4[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch4 {
-                        {&kextList[i], find4, replace4, sizeof(find4), 7},
+                        {&kextList[i], find4, replace4, sizeof(find4), 0},
                         KernelVersion::Yosemite, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch4, 1);
@@ -162,7 +159,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find5[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x50, 0x01};
                     const uint8_t replace5[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch5 {
-                        {&kextList[i], find5, replace5, sizeof(find5), 2},
+                        {&kextList[i], find5, replace5, sizeof(find5), 0},
                         KernelVersion::Yosemite, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch5, 1);
@@ -173,7 +170,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find6[]    = {0x01, 0x03, 0x04, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x50, 0x01};
                     const uint8_t replace6[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch6 {
-                        {&kextList[i], find6, replace6, sizeof(find6), 1},
+                        {&kextList[i], find6, replace6, sizeof(find6), 0},
                         KernelVersion::Yosemite, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch6, 1);
@@ -192,8 +189,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Skylake - 10.11 :: DVMT patches applied");
-                    }
-                    else if (getKernelVersion() == KernelVersion::Sierra){
+                    } else if (getKernelVersion() == KernelVersion::Sierra){
                         const uint8_t find[]    = {0x89, 0x45, 0xC8, 0x39, 0xC6, 0x76, 0x51};
                         const uint8_t replace[] = {0x89, 0x45, 0xC8, 0x39, 0xC6, 0xEB, 0x51};
                         KextPatch kext_patch {
@@ -203,8 +199,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Skylake - 10.12 :: DVMT patches applied");
-                    }
-                    else if (getKernelVersion() == KernelVersion::HighSierra){
+                    } else if (getKernelVersion() == KernelVersion::HighSierra){
                         const uint8_t find[]    = {0x4C, 0x89, 0x55, 0xB8, 0x76, 0x40};
                         const uint8_t replace[] = {0x4C, 0x89, 0x55, 0xB8, 0xEB, 0x40};
                         KextPatch kext_patch {
@@ -218,7 +213,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find[]    = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace[] = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch {
-                        {&kextList[i], find, replace, sizeof(find), 1},
+                        {&kextList[i], find, replace, sizeof(find), 0},
                         KernelVersion::ElCapitan, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch, 1);
@@ -229,7 +224,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find1[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace1[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch1 {
-                        {&kextList[i], find1, replace1, sizeof(find1), 2},
+                        {&kextList[i], find1, replace1, sizeof(find1), 0},
                         KernelVersion::ElCapitan, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch1, 1);
@@ -240,7 +235,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find2[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x50, 0x01};
                     const uint8_t replace2[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch2 {
-                        {&kextList[i], find2, replace2, sizeof(find2), 7},
+                        {&kextList[i], find2, replace2, sizeof(find2), 0},
                         KernelVersion::ElCapitan, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch2, 1);
@@ -251,7 +246,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find3[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x80, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace3[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch3 {
-                        {&kextList[i], find3, replace3, sizeof(find3), 1},
+                        {&kextList[i], find3, replace3, sizeof(find3), 0},
                         KernelVersion::ElCapitan, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch3, 1);
@@ -262,7 +257,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find4[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x90, 0x03, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace4[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch4 {
-                        {&kextList[i], find4, replace4, sizeof(find4), 3},
+                        {&kextList[i], find4, replace4, sizeof(find4), 0},
                         KernelVersion::ElCapitan, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch4, 1);
@@ -273,7 +268,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find5[]    = {0x01, 0x03, 0x04, 0x04, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace5[] = {0x01, 0x03, 0x04, 0x04, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch5 {
-                        {&kextList[i], find5, replace5, sizeof(find5), 1},
+                        {&kextList[i], find5, replace5, sizeof(find5), 0},
                         KernelVersion::ElCapitan, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch5, 1);
@@ -282,21 +277,31 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                 }
                 else if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, kextKBLGraphicsFramebufferId)) {
                     DBGLOG("igdvmt", "found %s", kextKBLGraphicsFramebufferId);
-                    /*if (getKernelVersion() == KernelVersion::HighSierra){
-                     const uint8_t find[]    = {0x4C, 0x89, 0x5D, 0xC0, 0x76, 0x46};
-                     const uint8_t replace[] = {0x4C, 0x89, 0x5D, 0xC0, 0xEB, 0x46};
-                     KextPatch kext_patch {
+                    /*if (getKernelVersion() == KernelVersion::Sierra){
+                        const uint8_t find[]    = {0x4D, 0xC8, 0x41, 0x39, 0xCD, 0x76, 0x53};
+                        const uint8_t replace[] = {0x4D, 0xC8, 0x41, 0x39, 0xCD, 0xEB, 0x53};
+                        KextPatch kext_patch {
+                            {&kextList[i], find, replace, sizeof(find), 1},
+                            KernelVersion::Sierra, KernelVersion::Sierra
+                        };
+                        applyPatches(patcher, index, &kext_patch, 1);
+                        progressState |= ProcessingState::GraphicsFramebufferPatched;
+                        DBGLOG("igdvmt", "Kabylake - 10.12 :: DVMT patches applied");
+                    } else if (getKernelVersion() == KernelVersion::HighSierra){
+                        const uint8_t find[]    = {0x4C, 0x89, 0x5D, 0xC0, 0x76, 0x46};
+                        const uint8_t replace[] = {0x4C, 0x89, 0x5D, 0xC0, 0xEB, 0x46};
+                        KextPatch kext_patch {
                             {&kextList[i], find, replace, sizeof(find), 1},
                             KernelVersion::HighSierra, KernelVersion::HighSierra
-                     };
-                     applyPatches(patcher, index, &kext_patch, 1);
-                     progressState |= ProcessingState::GraphicsFramebufferPatched;
-                     DBGLOG("igdvmt", "Kabylake - 10.13 :: DVMT patches applied");
+                        };
+                        applyPatches(patcher, index, &kext_patch, 1);
+                        progressState |= ProcessingState::GraphicsFramebufferPatched;
+                        DBGLOG("igdvmt", "Kabylake - 10.13 :: DVMT patches applied");
                     }*/
                     const uint8_t find[]    = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch {
-                        {&kextList[i], find, replace, sizeof(find), 4},
+                        {&kextList[i], find, replace, sizeof(find), 0},
                         KernelVersion::Sierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch, 1);
@@ -307,7 +312,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find1[]    = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x90, 0x03, 0x00, 0x00, 0x50, 0x01};
                     const uint8_t replace1[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch1 {
-                        {&kextList[i], find1, replace1, sizeof(find1), 1},
+                        {&kextList[i], find1, replace1, sizeof(find1), 0},
                         KernelVersion::Sierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch1, 1);
@@ -318,7 +323,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find2[]    = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace2[] = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch2 {
-                        {&kextList[i], find2, replace2, sizeof(find2), 1},
+                        {&kextList[i], find2, replace2, sizeof(find2), 0},
                         KernelVersion::Sierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch2, 1);
@@ -329,7 +334,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find3[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace3[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch3 {
-                        {&kextList[i], find3, replace3, sizeof(find3), 2},
+                        {&kextList[i], find3, replace3, sizeof(find3), 0},
                         KernelVersion::Sierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch3, 1);
@@ -340,7 +345,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find4[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace4[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch4 {
-                        {&kextList[i], find4, replace4, sizeof(find4), 2},
+                        {&kextList[i], find4, replace4, sizeof(find4), 0},
                         KernelVersion::Sierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch4, 1);
@@ -351,7 +356,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find5[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x60, 0x02, 0x00, 0x00, 0x50, 0x01};
                     const uint8_t replace5[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch5 {
-                        {&kextList[i], find5, replace5, sizeof(find5), 1},
+                        {&kextList[i], find5, replace5, sizeof(find5), 0},
                         KernelVersion::Sierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch5, 1);
@@ -362,7 +367,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t find6[]    = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x90, 0x03, 0x00, 0x00, 0x00, 0x00};
                     const uint8_t replace6[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch6 {
-                        {&kextList[i], find6, replace6, sizeof(find6), 2},
+                        {&kextList[i], find6, replace6, sizeof(find6), 0},
                         KernelVersion::Sierra, KernelVersion::HighSierra
                     };
                     applyPatches(patcher, index, &kext_patch6, 1);
