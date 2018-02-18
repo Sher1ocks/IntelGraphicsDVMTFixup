@@ -1,5 +1,8 @@
 IntelGraphicsDVMTFixup Changelog
 =============================
+#### v1.2.1
+- Lilu 1.2.2 compatibility fixes (Lilu 1.2.2 is required)
+
 #### v1.2.0
 - XCode 9 & Lilu 1.2.0 compatibility fixes (Lilu 1.2.0 is required)
 

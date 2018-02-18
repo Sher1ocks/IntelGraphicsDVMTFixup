@@ -29,9 +29,9 @@ static const char *kextKBLGraphicsFramebuffer[] {
     "/System/Library/Extensions/AppleIntelKBLGraphicsFramebuffer.kext/Contents/MacOS/AppleIntelKBLGraphicsFramebuffer" };
 
 static KernelPatcher::KextInfo kextList[] {
-    { kextBDWGraphicsFramebufferId, kextBDWGraphicsFramebuffer, 1, {true, true}, {}, KernelPatcher::KextInfo::Unloaded },
-    { kextSKLGraphicsFramebufferId, kextSKLGraphicsFramebuffer, 1, {true, true}, {}, KernelPatcher::KextInfo::Unloaded },
-    { kextKBLGraphicsFramebufferId, kextKBLGraphicsFramebuffer, 1, {true, true}, {}, KernelPatcher::KextInfo::Unloaded },
+    { kextBDWGraphicsFramebufferId, kextBDWGraphicsFramebuffer, 1, {}, {}, KernelPatcher::KextInfo::Unloaded },
+    { kextSKLGraphicsFramebufferId, kextSKLGraphicsFramebuffer, 1, {}, {}, KernelPatcher::KextInfo::Unloaded },
+    { kextKBLGraphicsFramebufferId, kextKBLGraphicsFramebuffer, 1, {}, {}, KernelPatcher::KextInfo::Unloaded },
 };
 
 static size_t kextListSize {arrsize(kextList)};
