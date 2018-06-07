@@ -90,12 +90,12 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Broadwell - 10.12 :: DVMT patches applied");
-                    } else if (getKernelVersion() == KernelVersion::HighSierra){
+                    } else if (getKernelVersion() == KernelVersion::Mojave){
                         const uint8_t find[]    = {0x4C, 0x89, 0x5D, 0xB8, 0x76, 0x44};
                         const uint8_t replace[] = {0x4C, 0x89, 0x5D, 0xB8, 0xEB, 0x44};
                         KextPatch kext_patch {
                             {&kextList[i], find, replace, sizeof(find), 1},
-                            KernelVersion::HighSierra, KernelVersion::HighSierra
+                            KernelVersion::Mojave, KernelVersion::Mojave
                         };
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -105,7 +105,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace[] = {0x00, 0x02, 0x02, 0x02, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch {
                         {&kextList[i], find, replace, sizeof(find), 0},
-                        KernelVersion::Yosemite, KernelVersion::HighSierra
+                        KernelVersion::Yosemite, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -116,7 +116,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace1[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch1 {
                         {&kextList[i], find1, replace1, sizeof(find1), 0},
-                        KernelVersion::Yosemite, KernelVersion::HighSierra
+                        KernelVersion::Yosemite, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch1, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -127,7 +127,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace2[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch2 {
                         {&kextList[i], find2, replace2, sizeof(find2), 0},
-                        KernelVersion::Yosemite, KernelVersion::HighSierra
+                        KernelVersion::Yosemite, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch2, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -138,7 +138,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace3[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch3 {
                         {&kextList[i], find3, replace3, sizeof(find3), 0},
-                        KernelVersion::Yosemite, KernelVersion::HighSierra
+                        KernelVersion::Yosemite, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch3, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -149,7 +149,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace4[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch4 {
                         {&kextList[i], find4, replace4, sizeof(find4), 0},
-                        KernelVersion::Yosemite, KernelVersion::HighSierra
+                        KernelVersion::Yosemite, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch4, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -160,7 +160,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace5[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch5 {
                         {&kextList[i], find5, replace5, sizeof(find5), 0},
-                        KernelVersion::Yosemite, KernelVersion::HighSierra
+                        KernelVersion::Yosemite, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch5, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -171,7 +171,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace6[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch6 {
                         {&kextList[i], find6, replace6, sizeof(find6), 0},
-                        KernelVersion::Yosemite, KernelVersion::HighSierra
+                        KernelVersion::Yosemite, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch6, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -199,12 +199,12 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Skylake - 10.12 :: DVMT patches applied");
-                    } else if (getKernelVersion() == KernelVersion::HighSierra){
+                    } else if (getKernelVersion() == KernelVersion::Mojave){
                         const uint8_t find[]    = {0x4C, 0x89, 0x55, 0xB8, 0x76, 0x40};
                         const uint8_t replace[] = {0x4C, 0x89, 0x55, 0xB8, 0xEB, 0x40};
                         KextPatch kext_patch {
                             {&kextList[i], find, replace, sizeof(find), 1},
-                            KernelVersion::HighSierra, KernelVersion::HighSierra
+                            KernelVersion::Mojave, KernelVersion::Mojave
                         };
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -214,7 +214,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace[] = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch {
                         {&kextList[i], find, replace, sizeof(find), 0},
-                        KernelVersion::ElCapitan, KernelVersion::HighSierra
+                        KernelVersion::ElCapitan, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -225,7 +225,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace1[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch1 {
                         {&kextList[i], find1, replace1, sizeof(find1), 0},
-                        KernelVersion::ElCapitan, KernelVersion::HighSierra
+                        KernelVersion::ElCapitan, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch1, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -236,7 +236,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace2[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch2 {
                         {&kextList[i], find2, replace2, sizeof(find2), 0},
-                        KernelVersion::ElCapitan, KernelVersion::HighSierra
+                        KernelVersion::ElCapitan, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch2, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -247,7 +247,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace3[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch3 {
                         {&kextList[i], find3, replace3, sizeof(find3), 0},
-                        KernelVersion::ElCapitan, KernelVersion::HighSierra
+                        KernelVersion::ElCapitan, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch3, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -258,7 +258,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace4[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch4 {
                         {&kextList[i], find4, replace4, sizeof(find4), 0},
-                        KernelVersion::ElCapitan, KernelVersion::HighSierra
+                        KernelVersion::ElCapitan, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch4, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -269,7 +269,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace5[] = {0x01, 0x03, 0x04, 0x04, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch5 {
                         {&kextList[i], find5, replace5, sizeof(find5), 0},
-                        KernelVersion::ElCapitan, KernelVersion::HighSierra
+                        KernelVersion::ElCapitan, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch5, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -287,12 +287,12 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
                         DBGLOG("igdvmt", "Kabylake - 10.12 :: DVMT patches applied");
-                    } else if (getKernelVersion() == KernelVersion::HighSierra){
+                    } else if (getKernelVersion() == KernelVersion::Mojave){
                         const uint8_t find[]    = {0x4C, 0x89, 0x5D, 0xC0, 0x76, 0x46};
                         const uint8_t replace[] = {0x4C, 0x89, 0x5D, 0xC0, 0xEB, 0x46};
                         KextPatch kext_patch {
                             {&kextList[i], find, replace, sizeof(find), 1},
-                            KernelVersion::HighSierra, KernelVersion::HighSierra
+                            KernelVersion::Mojave, KernelVersion::Mojave
                         };
                         applyPatches(patcher, index, &kext_patch, 1);
                         progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -302,7 +302,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch {
                         {&kextList[i], find, replace, sizeof(find), 0},
-                        KernelVersion::Sierra, KernelVersion::HighSierra
+                        KernelVersion::Sierra, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -313,7 +313,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace1[] = {0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch1 {
                         {&kextList[i], find1, replace1, sizeof(find1), 0},
-                        KernelVersion::Sierra, KernelVersion::HighSierra
+                        KernelVersion::Sierra, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch1, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -324,7 +324,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace2[] = {0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch2 {
                         {&kextList[i], find2, replace2, sizeof(find2), 0},
-                        KernelVersion::Sierra, KernelVersion::HighSierra
+                        KernelVersion::Sierra, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch2, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -335,7 +335,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace3[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch3 {
                         {&kextList[i], find3, replace3, sizeof(find3), 0},
-                        KernelVersion::Sierra, KernelVersion::HighSierra
+                        KernelVersion::Sierra, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch3, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -346,7 +346,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace4[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch4 {
                         {&kextList[i], find4, replace4, sizeof(find4), 0},
-                        KernelVersion::Sierra, KernelVersion::HighSierra
+                        KernelVersion::Sierra, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch4, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -357,7 +357,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace5[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch5 {
                         {&kextList[i], find5, replace5, sizeof(find5), 0},
-                        KernelVersion::Sierra, KernelVersion::HighSierra
+                        KernelVersion::Sierra, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch5, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
@@ -368,7 +368,7 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     const uint8_t replace6[] = {0x01, 0x03, 0x03, 0x03, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00};
                     KextPatch kext_patch6 {
                         {&kextList[i], find6, replace6, sizeof(find6), 0},
-                        KernelVersion::Sierra, KernelVersion::HighSierra
+                        KernelVersion::Sierra, KernelVersion::Mojave
                     };
                     applyPatches(patcher, index, &kext_patch6, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
