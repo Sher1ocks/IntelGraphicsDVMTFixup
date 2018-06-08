@@ -373,6 +373,18 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     applyPatches(patcher, index, &kext_patch6, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
                     DBGLOG("igdvmt", "Kabylake - 01030303 00009003 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    
+                    // For mojave
+                    const uint8_t find7[]    = {0x20, 0x02, 0x48, 0xBA, 0x00, 0x00, 0x00, 0x60};
+                    const uint8_t replace7[] = {0x30, 0x01, 0x48, 0xBA, 0x00, 0x00, 0x00, 0x80};
+                    KextPatch kext_patch7 {
+                        {&kextList[i], find7, replace7, sizeof(find7), 0},
+                        KernelVersion::Mojave
+                    };
+                    applyPatches(patcher, index, &kext_patch7, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt", "Kabylake - 200248BA 00000060 :: minStolenSize patch with 32mb DVMT-prealloc was applied (VRAM-2048MB)");
                 }
             }
         }
