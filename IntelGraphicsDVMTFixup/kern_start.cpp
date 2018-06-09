@@ -37,7 +37,7 @@ PluginConfiguration ADDPR(config) {
 	bootargBeta,
 	arrsize(bootargBeta),
 	KernelVersion::Yosemite,
-	KernelVersion::HighSierra,
+	KernelVersion::Mojave,
 	[]() {
 		igdvmt.init();
 	}
