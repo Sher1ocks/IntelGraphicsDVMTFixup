@@ -1,5 +1,8 @@
 IntelGraphicsDVMTFixup Changelog
 =============================
+#### v1.2.2
+- macOS 10.14 compatibility (Lilu 1.2.4 required)
+
 #### v1.2.1
 - Lilu 1.2.2 compatibility fixes (Lilu 1.2.2 is required)
 
