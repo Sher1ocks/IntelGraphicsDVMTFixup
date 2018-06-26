@@ -294,6 +294,18 @@ void IGDVMT::processKext(KernelPatcher &patcher, size_t index, mach_vm_address_t
                     applyPatches(patcher, index, &kext_patch5, 1);
                     progressState |= ProcessingState::GraphicsFramebufferPatched;
                     DBGLOG("igdvmt", "Skylake - 01030404 00002002 00000000 :: minStolenSize patch with 32mb DVMT-prealloc was applied");
+                    
+                    // B9000020 02000050 0148890D
+                    const uint8_t find6[]    = {0xB9, 0x00, 0x00, 0x20, 0x02, 0x00, 0x00, 0x50, 0x01, 0x48, 0x89, 0x0D};
+                    // B9000030 01000090 0048890D
+                    const uint8_t replace6[] = {0xB9, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00, 0x90, 0x00, 0x48, 0x89, 0x0D};
+                    KextPatch kext_patch6 {
+                        {&kextList[i], find6, replace6, sizeof(find6), 0},
+                        KernelVersion::ElCapitan, KernelVersion::Mojave
+                    };
+                    applyPatches(patcher, index, &kext_patch6, 1);
+                    progressState |= ProcessingState::GraphicsFramebufferPatched;
+                    DBGLOG("igdvmt", "Skylake - B9000020 02000050 0148890D :: minStolenSize patch with 32mb DVMT-prealloc was applied");
                 }
                 else if (!(progressState & ProcessingState::GraphicsFramebufferPatched) && !strcmp(kextList[i].id, kextKBLGraphicsFramebufferId)) {
                     DBGLOG("igdvmt", "found %s", kextKBLGraphicsFramebufferId);
